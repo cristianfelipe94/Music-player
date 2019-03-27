@@ -1,6 +1,7 @@
 body {
   background-color: #03191E;
-  color: white; }
+  color: white;
+  font-family: 'Merriweather', serif; }
 
 audio {
   width: 50vw;
@@ -23,12 +24,13 @@ audio::-webkit-media-controls-timeline {
   margin: 25px; }
 
 button {
-  height: 50px;
+  font-family: 'Merriweather', serif;
+  height: 20px;
   width: 100px;
   background-color: deeppink;
   border: none;
   margin: 2%;
-  font-size: 1.1em;
+  font-size: 15px;
   border-radius: 2px; }
 
 .ui-player-position {
@@ -36,7 +38,31 @@ button {
   margin: 10vh auto;
   background-color: #192D32;
   border-radius: 10px;
-  box-shadow: 0 0 20px black; }
+  box-shadow: 0 0 20px black;
+  cursor: pointer;
+  transition: 0.8s; }
+  .ui-player-position:hover {
+    box-shadow: 0 0 50px black;
+    transition: 0.8s; }
+
+.ui-playList-position {
+  list-style: none;
+  width: 50%;
+  margin: 0 auto; }
+
+.ui-playList-position li {
+  border: solid 1px deeppink;
+  margin: 2%;
+  box-shadow: 0 0 0px black;
+  cursor: pointer;
+  transition: 0.8s; }
+  .ui-playList-position li:hover {
+    transition: 0.8s;
+    box-shadow: 0 0 50px black; }
+
+.ui-playList-position p {
+  display: inline-block;
+  padding: 2%; }
 
 h2 {
   display: block;
