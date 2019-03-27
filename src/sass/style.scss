@@ -1,36 +1,51 @@
 body {
-    margin: 0;
+	background-color: #03191E;
+	color: white;
 }
 
-.task-main-container {
-    width: 50%;
-    margin: 100px auto;
-    border:1px solid black;
-    text-align: center;
+audio {
+	width: 50vw;
+	height: 30px;
 }
 
-.task-list-container {
-    width: 50%;
-    margin: 20px auto;
-    border:1px solid black;
-    padding: 5px;
-    text-align: left;
+audio::-webkit-media-controls-panel {
+	width: 25vw;
+	color: deeppink;
+	background-color: deeppink;
 }
 
-.task-list-item {
-    list-style: none;
-    position: relative;
+audio::-webkit-media-controls-volume-slider {
+	display: block;
+	color: deeppink;
+	background-color: deeppink;
 }
 
-.task-list-item-Id {
-    position: absolute;
-    left: -25px;
+audio::-webkit-media-controls-timeline {
+	display: block;
+	color: deeppink;
+	background-color: deeppink;
+	margin: 25px;
 }
 
-.input-name-task {
-
+button {
+	height: 50px;
+	width: 100px;
+	background-color: deeppink;
+	border: none;
+	margin: 2%;
+	font-size: 1.1em;
+	border-radius: 2px;
 }
 
-.input-add-task {
+.ui-player-position {
+	width: 50vw;
+	margin: 10vh auto;
+	background-color: #192D32;
+	border-radius: 10px;
+	box-shadow: 0 0 20px black;
+}
 
+h2 {
+	display: block;
+	padding: 1% 2%;
 }
