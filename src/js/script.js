@@ -17,32 +17,37 @@ const playList = [
     src: 'sounds/Radiohead-Daydreaming.mp3',
     band: 'RadioHead',
     song: 'Daydreaming',
+    cover: 'assets/daydreaming-cover.jpg',
   },
   {
     src: 'sounds/Tool-Right-in-two.mp3',
     band: 'Tool',
     song: 'Right in two',
+    cover: 'assets/right-in-two-cover.png',
   },
   {
     src: 'sounds/Tool-Sober.mp3',
     band: 'Tool',
     song: 'Sober',
+    cover: 'assets/sober-cover.jpg',
   },
   {
     src: 'sounds/Tool-The-Pot.mp3',
     band: 'Tool',
     song: 'The pot',
+    cover: 'assets/the-pot-cover.jpg',
   },
   {
     src: 'sounds/Sticky Fingers-Cool&Calm.mp3',
     band: 'Sticky Fingers',
     song: 'Cool & Calm',
+    cover: 'assets/cool-calm-cover.jpg',
   },
 ];
 
 const playerDOMcontainer = document.getElementById('js-player-layout');
 const playlistDOMcontainer = document.getElementById('js-playlist-layout');
-
+const albumCoverDOMcontainer = document.getElementById('js-albumCover-layout');
 
 const composedMediaPlayer = (function builtPlayer() {
   return class MediaPlayer {
@@ -54,7 +59,7 @@ const composedMediaPlayer = (function builtPlayer() {
       playerElement.pause();
     }
 
-    static ChangeSong(playPauseToggle, playerElement, cleanBandNameValue, cleanSongNameValue, musicPlayList, indexSong) {
+    static ChangeSong(playPauseToggle, playerElement, cleanBandNameValue, cleanSongNameValue, musicPlayList, indexSong, imageCover) {
       playPauseToggle.classList.remove('far', 'fa-play-circle');
       playPauseToggle.classList.add('far', 'fa-pause-circle');
       const cleanBandName = cleanBandNameValue;
@@ -64,6 +69,7 @@ const composedMediaPlayer = (function builtPlayer() {
       cleanSongName.innerText = '';
       cleanBandName.innerText = musicPlayList[indexSong].band;
       cleanSongName.innerText = musicPlayList[indexSong].song;
+      imageCover.setAttribute('src', playList[indexSong].cover);
       playerElement.setAttribute('src', playList[indexSong].src);
       MediaPlayer.PlayMusic(playerElement);
     }
@@ -83,10 +89,17 @@ const composedMediaPlayer = (function builtPlayer() {
       titleBand.innerText = playList[newSongIndex].band;
       titleBand.setAttribute('class', 'ui-titleband-position');
       titleBand.setAttribute('id', 'js-band-name');
+
       const titleSong = document.createElement('h2');
       titleSong.innerText = playList[newSongIndex].song;
       titleSong.setAttribute('class', 'ui-titlesong-position');
       titleSong.setAttribute('id', 'js-song-name');
+
+      const imageCover = document.createElement('img');
+      imageCover.setAttribute('class', 'ui-albumcover-width');
+      imageCover.setAttribute('id', 'js-albumcover-display');
+      imageCover.setAttribute('src', playList[newSongIndex].cover);
+      addingDOMelement(albumCoverDOMcontainer, imageCover);
 
       const buttonsWrapper = document.createElement('div');
       buttonsWrapper.setAttribute('class', 'ui-btnlist-position');
@@ -122,11 +135,11 @@ const composedMediaPlayer = (function builtPlayer() {
         newSongIndex += 1;
         if (newSongIndex < playList.length) {
           this.playerToggle = false;
-          MediaPlayer.ChangeSong(playPauseBtn, playerComponent, titleBand, titleSong, playList, newSongIndex);
+          MediaPlayer.ChangeSong(playPauseBtn, playerComponent, titleBand, titleSong, playList, newSongIndex, imageCover);
         } else if (newSongIndex > playList.length - 1) {
           newSongIndex = 0;
           this.playerToggle = false;
-          MediaPlayer.ChangeSong(playPauseBtn, playerComponent, titleBand, titleSong, playList, newSongIndex);
+          MediaPlayer.ChangeSong(playPauseBtn, playerComponent, titleBand, titleSong, playList, newSongIndex, imageCover);
         }
       }));
 
@@ -135,10 +148,10 @@ const composedMediaPlayer = (function builtPlayer() {
         if (newSongIndex < 0) {
           this.playerToggle = false;
           newSongIndex = playList.length - 1;
-          MediaPlayer.ChangeSong(playPauseBtn, playerComponent, titleBand, titleSong, playList, newSongIndex);
+          MediaPlayer.ChangeSong(playPauseBtn, playerComponent, titleBand, titleSong, playList, newSongIndex, imageCover);
         } else if (newSongIndex > -1) {
           this.playerToggle = false;
-          MediaPlayer.ChangeSong(playPauseBtn, playerComponent, titleBand, titleSong, playList, newSongIndex);
+          MediaPlayer.ChangeSong(playPauseBtn, playerComponent, titleBand, titleSong, playList, newSongIndex, imageCover);
         }
       }));
 
@@ -175,7 +188,9 @@ const composedPlaylist = (function builtList() {
           const togglerDOM = document.getElementById('js-toggle-player');
           const bandNameDOM = document.getElementById('js-band-name');
           const songNameDOM = document.getElementById('js-song-name');
-          composedMediaPlayer.ChangeSong(togglerDOM, audioDOM, bandNameDOM, songNameDOM, list, element.songPosition);
+          const albumCoverDOM = document.getElementById('js-albumcover-display');
+          
+          composedMediaPlayer.ChangeSong(togglerDOM, audioDOM, bandNameDOM, songNameDOM, list, element.songPosition, albumCoverDOM);
         }));
         addingDOMelement(playlist, playlistBandName);
         addingDOMelement(playlist, playlistSongName);

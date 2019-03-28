@@ -73,8 +73,10 @@ audio::-webkit-media-controls-play-button {
 
 .ui-playList-position {
 	list-style: none;
-	width: 50%;
-	margin: 0 auto;
+  width: 30%;
+  position: absolute;
+  left: 4vw;
+  bottom: 30vh;
 }
 
 .ui-playList-position li {
@@ -85,7 +87,7 @@ audio::-webkit-media-controls-play-button {
 	transition: 1s;
 	&:hover {
 		transition: 0.8s;
-		box-shadow: 0 0 15px deeppink;
+		box-shadow: 0 0 20px deeppink;
 	}
 }
 
@@ -115,4 +117,19 @@ audio::-webkit-media-controls-play-button {
   top: 10%;
   padding: 5px 0%;
   border-bottom: 1px solid deeppink;
+}
+
+.ui-songImage-size {
+  width: 400px;
+  height: 400px;
+  border: 1px solid deeppink;
+  position: absolute;
+  right: 5vh;
+  bottom: 25vh;
+  overflow: hidden;
+  text-align: center;
+}
+
+.ui-albumcover-width {
+  height: 100%;
 }
