@@ -62,20 +62,32 @@ audio::-webkit-media-controls-play-button {
 
 .ui-playList-position {
   list-style: none;
-  width: 30%;
+  width: 40%;
   position: absolute;
   left: 4vw;
-  bottom: 30vh; }
+  bottom: 15vh;
+  height: 72vh;
+  overflow-x: auto; }
 
-.ui-playList-position li {
+.ui-playList-default {
   border: solid 1px deeppink;
-  margin: 2%;
+  margin: 5%;
   box-shadow: 0 0 0px black;
   cursor: pointer;
   transition: 1s; }
-  .ui-playList-position li:hover {
+  .ui-playList-default:hover {
     transition: 0.8s;
     box-shadow: 0 0 20px deeppink; }
+
+.ui-playList-selected {
+  border: solid 1px deeppink;
+  margin: 5%;
+  box-shadow: 0 0 20px #be2378;
+  cursor: pointer;
+  transition: 1s; }
+  .ui-playList-selected:hover {
+    transition: 0.8s;
+    box-shadow: 0 0 5px deeppink; }
 
 .ui-playList-position p {
   display: inline-block;
@@ -106,12 +118,23 @@ audio::-webkit-media-controls-play-button {
   height: 400px;
   border: 1px solid deeppink;
   position: absolute;
-  right: 5vh;
-  bottom: 25vh;
+  right: 8vh;
+  bottom: 20vh;
   overflow: hidden;
   text-align: center; }
 
 .ui-albumcover-width {
   height: 100%; }
+
+.ui-bodyplayer-layout {
+  border-top: solid 1px deeppink;
+  height: 85vh;
+  width: 99vw;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0 auto;
+  right: 0; }
 
 /*# sourceMappingURL=style.css.map */

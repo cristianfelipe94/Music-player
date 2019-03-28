@@ -12,6 +12,12 @@ function generateIndexNumb(playListValue, elementValue) {
   return indexNumb;
 }
 
+function generateRandomNumb (maxValue) {
+	const maxNumber = maxValue;
+	const indexNumb = parseInt(Math.random() * maxValue);
+	return indexNumb;
+}
+
 const playList = [
   {
     src: 'sounds/Radiohead-Daydreaming.mp3',
@@ -42,6 +48,138 @@ const playList = [
     band: 'Sticky Fingers',
     song: 'Cool & Calm',
     cover: 'assets/cool-calm-cover.jpg',
+  },
+  {
+    src: 'sounds/A-Perfect-Circle-Judith.mp3',
+    band: 'A Perfect Circle',
+    song: 'Judith',
+    cover: 'assets/judith-cover.jpg',
+  },
+  {
+    src: 'sounds/Dead-Kennedys-Holiday-In-Cambodia.mp3',
+    band: 'Dead Kennedys',
+    song: 'Holiday In Cambodia',
+    cover: 'assets/holiday-in-cambodia-cover.jpg',
+  },
+  {
+    src: 'sounds/Dead-Kennedys-Police-Truck.mp3',
+    band: 'Dead Kennedys',
+    song: 'Police Truck',
+    cover: 'assets/police-truck-cover.jpg',
+  },
+  {
+    src: 'sounds/Deftones-Change.mp3',
+    band: 'Deftones',
+    song: 'Change',
+    cover: 'assets/change-cover.jpg',
+  },
+  {
+    src: 'sounds/Deftones-Digital-Bath.mp3',
+    band: 'Deftones',
+    song: 'Digital Bath',
+    cover: 'assets/digital-bath-cover.jpg',
+  },
+  {
+    src: 'sounds/Incubus-Wish-You-Were-Here.mp3',
+    band: 'Incubus',
+    song: 'Wish You Were Here',
+    cover: 'assets/wish-you-were-here-cover.jpg',
+  },
+  {
+    src: 'sounds/Jinjer-Pisces.mp3',
+    band: 'Jinjer',
+    song: 'Pisces',
+    cover: 'assets/pisces-cover.jpg',
+  },
+  {
+    src: 'sounds/Juan-Gabriel-Abrázame-Muy-Fuerte.mp3',
+    band: 'Juan Gabriel',
+    song: 'Abrázame Muy Fuerte',
+    cover: 'assets/abrazame-muy-fuerte-cover.jpg',
+  },
+  {
+    src: 'sounds/Katatonia-The-Racing-Heart.mp3',
+    band: 'Katatonia',
+    song: 'The Racing Heart',
+    cover: 'assets/the-racing-heart-cover.png',
+  },
+  {
+    src: 'sounds/Led-Zeppelin-Black-Dog.mp3',
+    band: 'Led Zeppelin',
+    song: 'Black Dog',
+    cover: 'assets/black-dog-cover.jpg',
+  },
+  {
+    src: 'sounds/Ozzy-Osbourne-Dreamer.mp3',
+    band: 'Ozzy Osbourne',
+    song: 'Dreamer',
+    cover: 'assets/dreamer-cover.jpg',
+  },
+  {
+    src: 'sounds/Pantera-Walk.mp3',
+    band: 'Pantera',
+    song: 'Walk',
+    cover: 'assets/walk-cover.jpg',
+  },
+  {
+    src: 'sounds/Pearl-Jam-Do-The-Evolution.mp3',
+    band: 'Pearl Jam',
+    song: 'Do The Evolution',
+    cover: 'assets/do-the-evolution-cover.jpg',
+  },
+  {
+    src: 'sounds/Pink-Floyd-Hey-You.mp3',
+    band: 'Pink Floyd',
+    song: 'Hey You',
+    cover: 'assets/hey-you-cover.jpg',
+  },
+  {
+    src: 'sounds/Puscifer-The-Arsonist.mp3',
+    band: 'Puscifer',
+    song: 'The Arsonist',
+    cover: 'assets/the-arsonist-cover.jpg',
+  },
+  {
+    src: 'sounds/Puscifer-The-Humbling-River.mp3',
+    band: 'Puscifer',
+    song: 'The-Humbling-River',
+    cover: 'assets/the-humbling-river-cover.jpg',
+  },
+  {
+    src: 'sounds/Silencer-Death-Pierce-Me.mp3',
+    band: 'Silencer',
+    song: 'Death Pierce Me',
+    cover: 'assets/death-pierce-me-cover.jpg',
+  },
+  {
+    src: 'sounds/Sticky-Fingers-Change.mp3',
+    band: 'Sticky Fingers',
+    song: 'Change',
+    cover: 'assets/change-cover.png',
+  },
+  {
+    src: 'sounds/Stone-Temple-Pilots-Creep.mp3',
+    band: 'Stone Temple Pilots',
+    song: 'Creep',
+    cover: 'assets/creep-cover.jpg',
+  },
+  {
+    src: 'sounds/Stone-Temple-Pilots-Plush.mp3',
+    band: 'Stone Temple Pilots',
+    song: 'Plush',
+    cover: 'assets/plush-cover.jpg',
+  },
+  {
+    src: 'sounds/Sweet-Dreams-Marilyn-Manson.mp3',
+    band: 'Marilyn Manson',
+    song: 'Sweet Dreams',
+    cover: 'assets/sweet-dreams-cover.jpg',
+  },
+  {
+    src: 'sounds/The-Ocean-Cambrian-II-Eternal-Recurrence.mp3',
+    band: 'The Ocean',
+    song: 'Cambrian II Eternal Recurrence',
+    cover: 'assets/cambrian-II-eternal-recurrence-cover.jpg',
   },
 ];
 
@@ -77,7 +215,7 @@ const composedMediaPlayer = (function builtPlayer() {
     constructor(playerContainer) {
       this.playerContainer = playerContainer;
 
-      let newSongIndex = 0;
+      let newSongIndex = generateRandomNumb(playList.length);
       this.playerToggle = true;
 
       const playerComponent = document.createElement('audio');
@@ -178,6 +316,7 @@ const composedPlaylist = (function builtList() {
 
       list.forEach((element) => {
         const playlist = document.createElement('li');
+        playlist.classList.add('ui-playList-default');
         const playlistBandName = document.createElement('p');
         const playlistSongName = document.createElement('p');
         playlistBandName.innerText = element.band;
@@ -189,7 +328,7 @@ const composedPlaylist = (function builtList() {
           const bandNameDOM = document.getElementById('js-band-name');
           const songNameDOM = document.getElementById('js-song-name');
           const albumCoverDOM = document.getElementById('js-albumcover-display');
-          
+
           composedMediaPlayer.ChangeSong(togglerDOM, audioDOM, bandNameDOM, songNameDOM, list, element.songPosition, albumCoverDOM);
         }));
         addingDOMelement(playlist, playlistBandName);
