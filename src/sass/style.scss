@@ -1,54 +1,72 @@
 body {
 	background-color: #03191E;
-	color: white;
-	font-family: 'Merriweather', serif;
+  color: white;
+  margin: 0;
+  font-family: 'Merriweather', serif;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
 }
 
 audio {
-	width: 50vw;
-	height: 30px;
+  width: 50%;
+  height: 25px;
+  margin: 0 auto;
+  display: block;
 }
 
 audio::-webkit-media-controls-panel {
 	width: 25vw;
-	color: deeppink;
-	background-color: deeppink;
-}
-
-audio::-webkit-media-controls-volume-slider {
-	display: block;
-	color: deeppink;
 	background-color: deeppink;
 }
 
 audio::-webkit-media-controls-timeline {
-	display: block;
-	color: deeppink;
-	background-color: deeppink;
-	margin: 25px;
+  margin: 25px;
 }
 
-button {
-	font-family: 'Merriweather', serif;
-	height: 20px;
-	width: 100px;
-	background-color: deeppink;
+audio::-webkit-media-controls-play-button {
+  display: none;
+}
+
+.ui-main-button {
+	width: 20%;
 	border: none;
 	margin: 2%;
-	font-size: 15px;
-	border-radius: 2px;
+  font-size: 35px;
+  text-align: center;
+  transition: 1s;
+  &:hover {
+    color: deeppink;
+    transition: 0.8s;
+  }
+}
+
+.ui-navigation-button {
+	width: 20%;
+	border: none;
+	margin: 2%;
+  font-size: 20px;
+  text-align: center;
+  transition: 1s;
+  &:hover {
+    color: deeppink;
+    transition: 0.8s;
+  }
 }
 
 .ui-player-position {
-	width: 50vw;
-	margin: 10vh auto;
-	background-color: #192D32;
-	border-radius: 10px;
-	box-shadow: 0 0 20px black;
-	cursor: pointer;
-	transition: 0.8s;
+	width: 100vw;
+  height: 15vh;
+  position: absolute;
+  margin: 0vh auto;
+  background-color: #192D32;
+  box-shadow: 0 0 20px black;
+  cursor: pointer;
+  transition: 1s;
+  bottom: 0;
 	&:hover {
-		box-shadow: 0 0 50px black;
+		box-shadow: 0 0 15px deeppink;
 		transition: 0.8s;
 	}
 }
@@ -64,10 +82,10 @@ button {
 	margin: 2%;
 	box-shadow: 0 0 0px black;
 	cursor: pointer;
-	transition: 0.8s;
+	transition: 1s;
 	&:hover {
 		transition: 0.8s;
-		box-shadow: 0 0 50px black;
+		box-shadow: 0 0 15px deeppink;
 	}
 }
 
@@ -76,7 +94,25 @@ button {
 	padding: 2%;
 }
 
-h2 {
-	display: block;
-	padding: 1% 2%;
+.ui-btnlist-position {
+  width: 40%;
+  margin: 1% auto;
+  text-align: center;
+}
+
+.ui-titleband-position {
+  display: inline-block;
+  padding: 1% 2%;
+  position: absolute;
+  top: 0;
+  margin: 0;
+}
+
+.ui-titlesong-position {
+  display: inline-block;
+  margin: 2% 2%;
+  position: absolute;
+  top: 10%;
+  padding: 5px 0%;
+  border-bottom: 1px solid deeppink;
 }

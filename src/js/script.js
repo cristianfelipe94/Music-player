@@ -13,25 +13,30 @@ function generateIndexNumb(playListValue, elementValue) {
 }
 
 const playList = [
-  song1 = {
+  {
     src: 'sounds/Radiohead-Daydreaming.mp3',
     band: 'RadioHead',
     song: 'Daydreaming',
   },
-  song2 = {
+  {
     src: 'sounds/Tool-Right-in-two.mp3',
     band: 'Tool',
     song: 'Right in two',
   },
-  song3 = {
+  {
     src: 'sounds/Tool-Sober.mp3',
     band: 'Tool',
     song: 'Sober',
   },
-  song4 = {
+  {
     src: 'sounds/Tool-The-Pot.mp3',
     band: 'Tool',
     song: 'The pot',
+  },
+  {
+    src: 'sounds/Sticky Fingers-Cool&Calm.mp3',
+    band: 'Sticky Fingers',
+    song: 'Cool & Calm',
   },
 ];
 
@@ -49,7 +54,9 @@ const composedMediaPlayer = (function builtPlayer() {
       playerElement.pause();
     }
 
-    static ChangeSong(playerElement, cleanBandNameValue, cleanSongNameValue, musicPlayList, indexSong) {
+    static ChangeSong(playPauseToggle, playerElement, cleanBandNameValue, cleanSongNameValue, musicPlayList, indexSong) {
+      playPauseToggle.classList.remove('far', 'fa-play-circle');
+      playPauseToggle.classList.add('far', 'fa-pause-circle');
       const cleanBandName = cleanBandNameValue;
       const cleanSongName = cleanSongNameValue;
       MediaPlayer.StopMusic(playerElement);
@@ -65,6 +72,7 @@ const composedMediaPlayer = (function builtPlayer() {
       this.playerContainer = playerContainer;
 
       let newSongIndex = 0;
+      this.playerToggle = true;
 
       const playerComponent = document.createElement('audio');
       playerComponent.setAttribute('src', playList[newSongIndex].src);
@@ -73,56 +81,71 @@ const composedMediaPlayer = (function builtPlayer() {
 
       const titleBand = document.createElement('h2');
       titleBand.innerText = playList[newSongIndex].band;
+      titleBand.setAttribute('class', 'ui-titleband-position');
       titleBand.setAttribute('id', 'js-band-name');
       const titleSong = document.createElement('h2');
       titleSong.innerText = playList[newSongIndex].song;
+      titleSong.setAttribute('class', 'ui-titlesong-position');
       titleSong.setAttribute('id', 'js-song-name');
 
-      const playBtn = document.createElement('button');
-      const pauseBtn = document.createElement('button');
-      const nextBtn = document.createElement('button');
-      const previousBtn = document.createElement('button');
+      const buttonsWrapper = document.createElement('div');
+      buttonsWrapper.setAttribute('class', 'ui-btnlist-position');
+      const playPauseBtn = document.createElement('span');
+      const nextBtn = document.createElement('span');
+      const previousBtn = document.createElement('span');
 
-      playBtn.innerText = 'PlayMe';
-      pauseBtn.innerText = 'PauseMe';
-      nextBtn.innerText = 'Next';
-      previousBtn.innerText = 'Previous';
 
-      playBtn.addEventListener('click', (() => {
-        MediaPlayer.PlayMusic(playerComponent);
-      }));
+      playPauseBtn.classList.add('ui-main-button', 'far', 'fa-play-circle');
+      playPauseBtn.setAttribute('id', 'js-toggle-player');
+      nextBtn.classList.add('fas', 'fa-step-forward', 'ui-navigation-button');
+      previousBtn.classList.add('fas', 'fa-step-backward', 'ui-navigation-button');
 
-      pauseBtn.addEventListener('click', (() => {
-        MediaPlayer.StopMusic(playerComponent);
+      addingDOMelement(buttonsWrapper, previousBtn);
+      addingDOMelement(buttonsWrapper, playPauseBtn);
+      addingDOMelement(buttonsWrapper, nextBtn);
+
+      playPauseBtn.addEventListener('click', (() => {
+        if (this.playerToggle === true) {
+          playPauseBtn.classList.remove('far', 'fa-play-circle');
+          playPauseBtn.classList.add('far', 'fa-pause-circle');
+          this.playerToggle = false;
+          MediaPlayer.PlayMusic(playerComponent);
+        } else {
+          playPauseBtn.classList.remove('far', 'fa-pause-circle');
+          playPauseBtn.classList.add('far', 'fa-play-circle');
+          this.playerToggle = true;
+          MediaPlayer.StopMusic(playerComponent);
+        }
       }));
 
       nextBtn.addEventListener('click', (() => {
         newSongIndex += 1;
         if (newSongIndex < playList.length) {
-          MediaPlayer.ChangeSong(playerComponent, titleBand, titleSong, playList, newSongIndex);
+          this.playerToggle = false;
+          MediaPlayer.ChangeSong(playPauseBtn, playerComponent, titleBand, titleSong, playList, newSongIndex);
         } else if (newSongIndex > playList.length - 1) {
           newSongIndex = 0;
-          MediaPlayer.ChangeSong(playerComponent, titleBand, titleSong, playList, newSongIndex);
+          this.playerToggle = false;
+          MediaPlayer.ChangeSong(playPauseBtn, playerComponent, titleBand, titleSong, playList, newSongIndex);
         }
       }));
 
       previousBtn.addEventListener('click', (() => {
         newSongIndex -= 1;
         if (newSongIndex < 0) {
+          this.playerToggle = false;
           newSongIndex = playList.length - 1;
-          MediaPlayer.ChangeSong(playerComponent, titleBand, titleSong, playList, newSongIndex);
+          MediaPlayer.ChangeSong(playPauseBtn, playerComponent, titleBand, titleSong, playList, newSongIndex);
         } else if (newSongIndex > -1) {
-          MediaPlayer.ChangeSong(playerComponent, titleBand, titleSong, playList, newSongIndex);
+          this.playerToggle = false;
+          MediaPlayer.ChangeSong(playPauseBtn, playerComponent, titleBand, titleSong, playList, newSongIndex);
         }
       }));
 
       addingDOMelement(this.playerContainer, playerComponent);
       addingDOMelement(this.playerContainer, titleBand);
       addingDOMelement(this.playerContainer, titleSong);
-      addingDOMelement(this.playerContainer, playBtn);
-      addingDOMelement(this.playerContainer, pauseBtn);
-      addingDOMelement(this.playerContainer, previousBtn);
-      addingDOMelement(this.playerContainer, nextBtn);
+      addingDOMelement(this.playerContainer, buttonsWrapper);
     }
   };
 }());
@@ -149,9 +172,10 @@ const composedPlaylist = (function builtList() {
         playlist.setAttribute('data-song-clicked', element.songPosition);
         playlist.addEventListener('click', (() => {
           const audioDOM = document.getElementById('js-player-controls');
+          const togglerDOM = document.getElementById('js-toggle-player');
           const bandNameDOM = document.getElementById('js-band-name');
           const songNameDOM = document.getElementById('js-song-name');
-          composedMediaPlayer.ChangeSong(audioDOM, bandNameDOM, songNameDOM, list, element.songPosition);
+          composedMediaPlayer.ChangeSong(togglerDOM, audioDOM, bandNameDOM, songNameDOM, list, element.songPosition);
         }));
         addingDOMelement(playlist, playlistBandName);
         addingDOMelement(playlist, playlistSongName);
