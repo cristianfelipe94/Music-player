@@ -189,10 +189,13 @@ const albumCoverDOMcontainer = document.getElementById('js-albumCover-layout');
 
 const composedMediaPlayer = (function builtPlayer() {
   return class MediaPlayer {
+
+    // Plays music
     static PlayMusic(playerElement) {
       playerElement.play();
     }
 
+    // Stops music
     static StopMusic(playerElement) {
       playerElement.pause();
     }
