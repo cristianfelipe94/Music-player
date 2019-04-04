@@ -137,4 +137,10 @@ audio::-webkit-media-controls-play-button {
   margin: 0 auto;
   right: 0; }
 
+.ui-right-float {
+  float: right; }
+
+.ui-left-float {
+  float: left; }
+
 /*# sourceMappingURL=style.css.map */
