@@ -192,19 +192,19 @@ const Singletone = (function singletoneBuilder() {
   ];
   let instance = null;
 
-  return class SingleToneClass {
+  return class {
     static Subscriptions() {
       Object.freeze({
-        Play_Song: Symbol('Play_Song'),
-        Stop_Song: Symbol('Stop_Song'),
-        Change_Song: Symbol('Change_Song'),
+        Play_Song: Symbol(`${PREFIX}Play_Song`),
+        Stop_Song: Symbol(`${PREFIX}Stop_Song`),
+        Change_Song: Symbol(`${PREFIX}Change_Song`),
       });
     }
 
     // Constructor will generate instance if needed it.
     // ///////////
     constructor() {
-      if(!instance) {
+      if (!instance) {
         this.getStorage();
         instance = this;
       }
@@ -217,33 +217,19 @@ const Singletone = (function singletoneBuilder() {
       return playList;
     }
 
-    // Plays music
-    static PlayMusic(playerElement) {
-      playerElement.play();
+    /*// Plays music
+    PlayMusic(playerElement) {
       Mediator.Publish(Singletone.Subscriptions.Play_Song, { playerElement });
     }
 
     // Stops music
-    static StopMusic(playerElement) {
+    StopMusic(playerElement) {
       Mediator.Publish(Singletone.Subscriptions.Stop_Song, { playerElement });
-      playerElement.pause();
     }
 
-    static ChangeSong(playPauseToggle, playerElement, cleanBandNameValue, cleanSongNameValue, musicPlayList, indexSong, imageCover) {
-      Mediator.Publish(Singletone.Subscriptions.Change_Song);
-      playPauseToggle.classList.remove('far', 'fa-play-circle');
-      playPauseToggle.classList.add('far', 'fa-pause-circle');
-      const cleanBandName = cleanBandNameValue;
-      const cleanSongName = cleanSongNameValue;
-      MediaPlayer.StopMusic(playerElement);
-      cleanBandName.innerText = '';
-      cleanSongName.innerText = '';
-      cleanBandName.innerText = musicPlayList[indexSong].band;
-      cleanSongName.innerText = musicPlayList[indexSong].song;
-      imageCover.setAttribute('src', playList[indexSong].cover);
-      playerElement.setAttribute('src', playList[indexSong].src);
-      MediaPlayer.PlayMusic(playerElement);
-    }
+    ChangeSong(playPauseToggle, playerElement, cleanBandNameValue, cleanSongNameValue, musicPlayList, indexSong, imageCover) {
+      Mediator.Publish(Singletone.Subscriptions.Change_Song, { playList, indexSong });
+    }*/
 
     /**
      * Method to sync the data with the localstorage
@@ -275,7 +261,7 @@ const Singletone = (function singletoneBuilder() {
 const Mediator = (function mediatorBuilder() {
   const mainTopics = {};
 
-  return class MediatorClass {
+  return class {
     // Getter, keep topics updated
     // //////
     static get topicsGetter() {
@@ -295,6 +281,15 @@ const Mediator = (function mediatorBuilder() {
 
       // returns the unsubscribe method
       return () => Mediator.Unsubscribe(topic, callback);
+    }
+
+    static Unsubscribe(topic, callback) {
+      if (!mainTopics.hasOwnProperty(topic)) return false;
+
+      // remove the callback for the topic
+      mainTopics[topic] = mainTopics[topic].filter(c => c !== callback);
+
+      return true;
     }
 
     // Publish, will trigger the callback for each subscribed element
@@ -318,6 +313,7 @@ const MediaPlayer = (function playerBuilder() {
       this.selectorPlayList = playlistDOMcontainer;
       this.selectorAlbumCov = albumCoverDOMcontainer;
       this.defaultList = new Singletone();
+      this.defaulMediator = new Mediator();
 
       this.newSongIndex = generateRandomNumb(this.defaultList.data.length);
       this.playerToggle = true;
@@ -326,8 +322,9 @@ const MediaPlayer = (function playerBuilder() {
       // Bottons and elements from component must be subscribed
       // This will create a new element to respond for a cetain callback
       // /////////
-      Mediator.Subscribe(Singletone.Subscriptions.Play_Song, this.PlayMusic);
-      Mediator.Subscribe(Singletone.Subscriptions.Stop_Song, this.StopMusic);
+      /*Mediator.Subscribe(Singletone.Subscriptions.Play_Song, this.PlayMusic.bind(this));
+      Mediator.Subscribe(Singletone.Subscriptions.Stop_Song, this.StopMusic.bind(this));
+      Mediator.Subscribe(Singletone.Subscriptions.Change_Song, this.ChangeSong.bind(this));*/
 
       this.render();
     }
@@ -497,6 +494,8 @@ const Playlist = (function builtList() {
       this.playlistContainer = playlistDOMcontainer;
       this.defaultPlayList = new Singletone();
 
+      /*Mediator.Subscribe(Singletone.Subscriptions.Change_Song, this.ChangeSong);*/
+
       this.defaultPlayList.data.forEach((element) => {
         const playlistItem = {
           band: element.band,
@@ -518,13 +517,11 @@ const Playlist = (function builtList() {
         const playlistSongName = document.createElement('p');
         playlistBandName.innerText = element.band;
         playlistSongName.innerText = element.song;
-        playlist.setAttribute('data-song-clicked', element.songPosition);
-        playlist.addEventListener('click', (() => {
-          Singletone.ChangeSong(
-            this.defaultPlayList.data,
-            element.songPosition,
-          );
-        }));
+        const elementIndex = element.songPosition;
+        playlist.setAttribute('data-song-clicked', elementIndex);
+        /*playlist.addEventListener('click', (() => {
+          Mediator.Publish(Singletone.Subscriptions.Change_Song, { elementIndex });
+        }));*/
         addingDOMelement(playlist, playlistBandName);
         addingDOMelement(playlist, playlistSongName);
         addingDOMelement(this.playlistContainer, playlist);
