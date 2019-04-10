@@ -14,11 +14,12 @@
 <body>
   <div id="ui-body">
     <ul>
-      <li>HOME</li>
-      <li>PLAYLIST</li>
+      <li id="js-goToHome-change" class="ui-nav-layout">HOME</li>
+      <li id="js-goToList-change" class="ui-nav-layout">PLAYLIST</li>
     </ul>
-    <div class="ui-bodyplayer-layout">
-      <div id="js-playlist-layout" class="ui-playList-position"></div>
+    <div class="ui-bodyplayer-moved-layout" id="js-bodyplayer-layout">
+      <div class="ui-playList-position" id="js-playlist-content"></div>
+      <div id="js-playlist-layout" class="ui-homelist-position"></div>
       <div id="js-albumCover-layout" class="ui-songImage-size"></div>
     </div>
     <div id="js-player-layout" class="ui-player-position"></div>

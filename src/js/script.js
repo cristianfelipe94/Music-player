@@ -18,9 +18,26 @@ function generateRandomNumb (maxValue) {
 	return indexNumb;
 }
 
+const goToHome = document.getElementById('js-goToHome-change');
+const goToList = document.getElementById('js-goToList-change');
+const layoutMoving = document.getElementById('js-bodyplayer-layout');
+
+
+goToHome.addEventListener('click', (() => {
+  layoutMoving.setAttribute('class', 'ui-bodyplayer-default-layout');
+}));
+
+goToList.addEventListener('click', (() => {
+  layoutMoving.setAttribute('class', 'ui-bodyplayer-moved-layout');
+}));
+
 const playerDOMcontainer = document.getElementById('js-player-layout');
 const playlistDOMcontainer = document.getElementById('js-playlist-layout');
+const defaultlistDOMcontainer = document.getElementById('js-playlist-content');
 const albumCoverDOMcontainer = document.getElementById('js-albumCover-layout');
+
+
+
 
 const Singletone = (function singletoneBuilder() {
   const PREFIX = 'default_list_data';
@@ -215,6 +232,17 @@ const Singletone = (function singletoneBuilder() {
     // ///////
     get data() {
       return playList;
+    }
+
+    get(id) {
+      const outerIndex = id;
+      playList.forEach((element) => {
+        const insiderIndex = playList.indexOf(element);
+        console.log(outerIndex);
+        console.log(playList.indexOf(element));
+        /*playList.indexOf(element);*/
+      });
+      /*return playList.find(data => data.id === data.id);*/
     }
 
     /*// Plays music
@@ -492,6 +520,7 @@ const Playlist = (function builtList() {
   return class PlayList {
     constructor() {
       this.playlistContainer = playlistDOMcontainer;
+      this.defaultlistContainer = defaultlistDOMcontainer;
       this.defaultPlayList = new Singletone();
 
       /*Mediator.Subscribe(Singletone.Subscriptions.Change_Song, this.ChangeSong);*/
@@ -506,6 +535,7 @@ const Playlist = (function builtList() {
       });
 
       this.listComponent();
+      this.listContainers();
     }
 
     listComponent() {
@@ -519,13 +549,42 @@ const Playlist = (function builtList() {
         playlistSongName.innerText = element.song;
         const elementIndex = element.songPosition;
         playlist.setAttribute('data-song-clicked', elementIndex);
-        /*playlist.addEventListener('click', (() => {
-          Mediator.Publish(Singletone.Subscriptions.Change_Song, { elementIndex });
-        }));*/
+        playlist.setAttribute('draggable', true);
+        playlist.addEventListener('ondragstart', ((event) => {
+          console.log(event.target.getAttribute('data-song-clicked'));
+          event.dataTransfer.setData('text', event.target.getAttribute('data-song-clicked'));
+        }));
+        playlist.addEventListener('click', (() => {
+          console.log(this.defaultPlayList);
+          /*Mediator.Publish(Singletone.Subscriptions.Change_Song, { elementIndex });*/
+        }));
+
         addingDOMelement(playlist, playlistBandName);
         addingDOMelement(playlist, playlistSongName);
         addingDOMelement(this.playlistContainer, playlist);
       });
+    }
+
+    listContainers() {
+      this.playlistContainer.addEventListener('ondrop', ((event) => {
+        event.preventDefault();
+        const data = event.dataTransfer.getData('text');
+        const selectedElement = document.getElementsByClassName('data-song-clicked', data);
+        event.target.appendChild(selectedElement);
+      }));
+      this.defaultlistContainer.addEventListener('ondrop', ((event) => {
+        event.preventDefault();
+        const data = event.dataTransfer.getData('text');
+        const selectedElement = document.getElementsByClassName('data-song-clicked', data);
+        event.target.appendChild(selectedElement);
+      }));
+
+      this.defaultlistContainer.addEventListener('ondragover', ((event) => {
+        event.preventDefault();
+      }));
+      this.playlistContainer.addEventListener('ondragover', ((event) => {
+        event.preventDefault();
+      }));
     }
   };
 }());

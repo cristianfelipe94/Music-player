@@ -76,8 +76,9 @@ audio::-webkit-media-controls-play-button {
   width: 40%;
   position: absolute;
   left: 4vw;
-  bottom: 15vh;
-  height: 72vh;
+  bottom: 5vh;
+  height: 80vh;
+  border: 1px solid white;
   overflow-x: auto;
 }
 
@@ -148,16 +149,44 @@ audio::-webkit-media-controls-play-button {
   height: 100%;
 }
 
-.ui-bodyplayer-layout {
+.ui-bodyplayer-default-layout {
   border-top: solid 1px deeppink;
   height: 85vh;
   width: 99vw;
-  overflow: hidden;
-  position: absolute;
+  position: relative;
   bottom: 0;
   left: 0;
   margin: 0 auto;
   right: 0;
+  transition: 3s ease;
+}
+
+.ui-bodyplayer-moved-layout {
+  border-top: solid 1px deeppink;
+  height: 85vh;
+  width: 99vw;
+  position: relative;
+  bottom: 0;
+  left: 50vw;
+  margin: 0 auto;
+  right: 0;
+  transition: 3s;
+  .ui-homelist-position  {
+    left: -35vw;
+    transition: 2s;
+  }
+}
+
+.ui-homelist-position {
+  list-style: none;
+  width: 40%;
+  position: absolute;
+  left: -47vw;
+  bottom: 5vh;
+  height: 80vh;
+  border: 1px solid deeppink;
+  overflow-x: auto;
+  transition: 2s;
 }
 
 .ui-right-float {
@@ -166,4 +195,11 @@ audio::-webkit-media-controls-play-button {
 
 .ui-left-float {
   float: left;
+}
+
+.ui-nav-layout {
+  cursor: pointer;
+  list-style: none;
+  width: 40%;
+  display: inline-block;
 }
