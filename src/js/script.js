@@ -347,18 +347,6 @@ const Singletone = (function singletoneBuilder() {
       return newPlayList;
     }
 
-    set addToDefaultList(element) {
-      playList.push(element);
-      console.log(playList);
-    }
-
-    set addToCreatedList(element) {
-      const index = generateIndexNumb(newPlayList, element);
-      const elementFrom = generateIndexNumb(newPlayList, index);
-      newPlayList.push(elementFrom);
-      console.log(newPlayList);
-    }
-
     get(id) {
       return playList.find(item => generateIndexNumb(playList, item) === id);
     }
@@ -648,6 +636,12 @@ const Playlist = (function builtList() {
       }
 
       function changeDataSide(elementToBePushed) {
+        defaultPlayList.data.forEach((element) => {
+          console.log(element);
+          for (const key in element) {
+            console.log(element);
+          }
+        });
         console.log(defaultPlayList.addToCreatedList = elementToBePushed);
       }
 
