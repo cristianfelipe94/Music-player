@@ -39,283 +39,205 @@ const albumCoverDOMcontainer = document.getElementById('js-albumCover-layout');
 
 const Singletone = (function singletoneBuilder() {
   const PREFIX = 'current_position';
+  const PREFIXDefaultStorage = 'saving_default_data';
+  const PREFIXCreatedStorage = 'saving_created_data';
   // Created Data or playList and init instance state
   // ////////////
-  const playList = [
+  let playList = [
     {
       src: 'sounds/Tool-Right-in-two.mp3',
       band: 'Tool',
       song: 'Right in two',
       cover: 'assets/right-in-two-cover.png',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_1`,
     },
     {
       src: 'sounds/Tool-Sober.mp3',
       band: 'Tool',
       song: 'Sober',
       cover: 'assets/sober-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_2`,
     },
     {
       src: 'sounds/Tool-The-Pot.mp3',
       band: 'Tool',
       song: 'The pot',
       cover: 'assets/the-pot-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_3`,
     },
     {
       src: 'sounds/Sticky Fingers-Cool&Calm.mp3',
       band: 'Sticky Fingers',
       song: 'Cool & Calm',
       cover: 'assets/cool-calm-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_4`,
     },
     {
       src: 'sounds/A-Perfect-Circle-Judith.mp3',
       band: 'A Perfect Circle',
       song: 'Judith',
       cover: 'assets/judith-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_5`,
     },
     {
       src: 'sounds/Dead-Kennedys-Holiday-In-Cambodia.mp3',
       band: 'Dead Kennedys',
       song: 'Holiday In Cambodia',
       cover: 'assets/holiday-in-cambodia-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_6`,
     },
     {
       src: 'sounds/Dead-Kennedys-Police-Truck.mp3',
       band: 'Dead Kennedys',
       song: 'Police Truck',
       cover: 'assets/police-truck-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_7`,
     },
     {
       src: 'sounds/Deftones-Change.mp3',
       band: 'Deftones',
       song: 'Change',
       cover: 'assets/change-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_8`,
     },
     {
       src: 'sounds/Deftones-Digital-Bath.mp3',
       band: 'Deftones',
       song: 'Digital Bath',
       cover: 'assets/digital-bath-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_9`,
     },
     {
       src: 'sounds/Incubus-Wish-You-Were-Here.mp3',
       band: 'Incubus',
       song: 'Wish You Were Here',
       cover: 'assets/wish-you-were-here-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_10`,
     },
     {
       src: 'sounds/Jinjer-Pisces.mp3',
       band: 'Jinjer',
       song: 'Pisces',
       cover: 'assets/pisces-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_11`,
     },
     {
       src: 'sounds/Juan-Gabriel-Abrázame-Muy-Fuerte.mp3',
       band: 'Juan Gabriel',
       song: 'Abrázame Muy Fuerte',
       cover: 'assets/abrazame-muy-fuerte-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_12`,
     },
     {
       src: 'sounds/Katatonia-The-Racing-Heart.mp3',
       band: 'Katatonia',
       song: 'The Racing Heart',
       cover: 'assets/the-racing-heart-cover.png',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_13`,
     },
     {
       src: 'sounds/Led-Zeppelin-Black-Dog.mp3',
       band: 'Led Zeppelin',
       song: 'Black Dog',
       cover: 'assets/black-dog-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_14`,
     },
     {
       src: 'sounds/Ozzy-Osbourne-Dreamer.mp3',
       band: 'Ozzy Osbourne',
       song: 'Dreamer',
       cover: 'assets/dreamer-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_15`,
     },
     {
       src: 'sounds/Pantera-Walk.mp3',
       band: 'Pantera',
       song: 'Walk',
       cover: 'assets/walk-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_16`,
     },
     {
       src: 'sounds/Pearl-Jam-Do-The-Evolution.mp3',
       band: 'Pearl Jam',
       song: 'Do The Evolution',
       cover: 'assets/do-the-evolution-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_17`,
     },
     {
       src: 'sounds/Pink-Floyd-Hey-You.mp3',
       band: 'Pink Floyd',
       song: 'Hey You',
       cover: 'assets/hey-you-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_18`,
     },
     {
       src: 'sounds/Puscifer-The-Arsonist.mp3',
       band: 'Puscifer',
       song: 'The Arsonist',
       cover: 'assets/the-arsonist-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_19`,
     },
     {
       src: 'sounds/Puscifer-The-Humbling-River.mp3',
       band: 'Puscifer',
       song: 'The-Humbling-River',
       cover: 'assets/the-humbling-river-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_20`,
     },
     {
       src: 'sounds/Silencer-Death-Pierce-Me.mp3',
       band: 'Silencer',
       song: 'Death Pierce Me',
       cover: 'assets/death-pierce-me-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_21`,
     },
     {
       src: 'sounds/Sticky-Fingers-Change.mp3',
       band: 'Sticky Fingers',
       song: 'Change',
       cover: 'assets/change-cover.png',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_22`,
     },
     {
       src: 'sounds/Stone-Temple-Pilots-Creep.mp3',
       band: 'Stone Temple Pilots',
       song: 'Creep',
       cover: 'assets/creep-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_23`,
     },
     {
       src: 'sounds/Stone-Temple-Pilots-Plush.mp3',
       band: 'Stone Temple Pilots',
       song: 'Plush',
       cover: 'assets/plush-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_24`,
     },
     {
       src: 'sounds/Sweet-Dreams-Marilyn-Manson.mp3',
       band: 'Marilyn Manson',
       song: 'Sweet Dreams',
       cover: 'assets/sweet-dreams-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_25`,
     },
     {
       src: 'sounds/The-Ocean-Cambrian-II-Eternal-Recurrence.mp3',
       band: 'The Ocean',
       song: 'Cambrian II Eternal Recurrence',
       cover: 'assets/cambrian-II-eternal-recurrence-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(playList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_26`,
     },
   ];
 
-  const newPlayList = [
+  let newPlayList = [
     {
       src: 'sounds/Radiohead-Daydreaming.mp3',
       band: 'RadioHead',
       song: 'Daydreaming',
       cover: 'assets/daydreaming-cover.jpg',
-      songPosition: function (element) {
-        const positionedAt = generateIndexNumb(newPlayList, element);
-        return `${PREFIX}_${positionedAt}`;
-      }
+      songPosition: `${PREFIX}_27`,
     },
   ];
+  
   let instance = null;
 
   return class {
@@ -331,7 +253,6 @@ const Singletone = (function singletoneBuilder() {
     // ///////////
     constructor() {
       if (!instance) {
-        this.getStorage();
         instance = this;
       }
       return instance;
@@ -370,8 +291,10 @@ const Singletone = (function singletoneBuilder() {
      */
     updateStorage() {
       try {
-        const json = JSON.stringify(this.playList);
-        localStorage.setItem(PREFIX, json);
+        const defaultJSONList = JSON.stringify(playList);
+        const newJSONList = JSON.stringify(newPlayList);
+        localStorage.setItem(PREFIXDefaultStorage, defaultJSONList);
+        localStorage.setItem(PREFIXCreatedStorage, newJSONList);
       } catch (error) {
         console.error(error);
       }
@@ -382,9 +305,14 @@ const Singletone = (function singletoneBuilder() {
      */
     getStorage() {
       try {
-        let data = localStorage.getItem(PREFIX);
-        data = JSON.parse(data);
-        if (data && Array.isArray(data) && data.length) this.playList = data;
+        const defaultData = localStorage.getItem(PREFIXDefaultStorage);
+        const createdData = localStorage.getItem(PREFIXCreatedStorage);
+        const defaultParsedData = JSON.parse(defaultData);
+        const createdParsedData = JSON.parse(createdData);
+        if (defaultParsedData && Array.isArray(defaultParsedData) && defaultParsedData.length && createdParsedData && Array.isArray(createdParsedData) && createdParsedData.length){
+          playList = defaultParsedData;
+          newPlayList = createdParsedData;
+        }
       } catch (error) {
         console.error(error);
       }
@@ -448,6 +376,8 @@ const MediaPlayer = (function playerBuilder() {
       this.selectorAlbumCov = albumCoverDOMcontainer;
       this.defaultList = new Singletone();
       this.defaulMediator = new Mediator();
+
+      this.defaultList.getStorage();
 
       this.newSongIndex = generateRandomNumb(this.defaultList.dataNew.length);
       this.playerToggle = true;
@@ -601,7 +531,7 @@ const MediaPlayer = (function playerBuilder() {
       playerElement = this.audioDOMComponent,
       cleanBandNameValue = this.bandDOMComponent,
       cleanSongNameValue = this.songDOMComponent,
-      musicPlayList = this.defaultList.data,
+      musicPlayList = this.defaultList.dataNew,
       indexSong = this.newSongIndex,
       imageCover = this.imageDOMComponent,
     ) {
@@ -628,6 +558,10 @@ const Playlist = (function builtList() {
       const defaultlistContainer = defaultlistDOMcontainer;
       const defaultPlayList = new Singletone();
 
+      console.log(defaultPlayList.data);
+      console.log(defaultPlayList.dataNew);
+      console.log(defaultPlayList.updateStorage);
+
       /*Mediator.Subscribe(Singletone.Subscriptions.Change_Song, this.ChangeSong);*/
 
       function dragstart(event) {
@@ -635,18 +569,8 @@ const Playlist = (function builtList() {
         event.dataTransfer.setData('text', idElement);
       }
 
-      function changeDataSide(elementToBePushed) {
-        defaultPlayList.data.forEach((element) => {
-          console.log(element);
-          for (const key in element) {
-            console.log(element);
-          }
-        });
-        console.log(defaultPlayList.addToCreatedList = elementToBePushed);
-      }
-
       function listDefaultComponent(dataInstance, container) {
-        dataInstance.data.forEach((element) => {
+        dataInstance.forEach((element) => {
           const playlist = document.createElement('li');
           playlist.classList.add('ui-playList-default');
           const playlistBandName = document.createElement('p');
@@ -654,7 +578,7 @@ const Playlist = (function builtList() {
           playlistBandName.innerText = element.band;
           playlistSongName.innerText = element.song;
           const elementIndex = element.songPosition;
-          playlist.setAttribute('data-song-clicked', elementIndex(element));
+          playlist.setAttribute('data-song-clicked', elementIndex);
           playlist.setAttribute('draggable', true);
           playlist.addEventListener('dragstart', dragstart);
           addingDOMelement(playlist, playlistBandName);
@@ -664,16 +588,15 @@ const Playlist = (function builtList() {
       }
       
       function listNewComponent(dataInstance, container) {
-        dataInstance.dataNew.forEach((element) => {
+        dataInstance.forEach((element) => {
           const playlist = document.createElement('li');
           playlist.classList.add('ui-playList-default');
-
           const playlistBandName = document.createElement('p');
           const playlistSongName = document.createElement('p');
           playlistBandName.innerText = element.band;
           playlistSongName.innerText = element.song;
           const elementIndex = element.songPosition;
-          playlist.setAttribute('data-song-clicked', elementIndex(element));
+          playlist.setAttribute('data-song-clicked', elementIndex);
           playlist.setAttribute('draggable', true);
           playlist.addEventListener('dragstart', dragstart);
           addingDOMelement(playlist, playlistBandName);
@@ -686,21 +609,45 @@ const Playlist = (function builtList() {
         if (event.target.className === 'ui-playList-position') {
           const data = event.dataTransfer.getData('text');
           const selectedElement = document.querySelector(`[data-song-clicked="${data}"]`);
-          console.log(selectedElement);
           selectedElement.parentNode.removeChild(selectedElement);
           event.target.appendChild(selectedElement);
-          changeDataSide(data);
+          for (let e = 0; e < defaultPlayList.data.length; e++){
+            if(data === defaultPlayList.data[e].songPosition) {
+              const elementToRemove = generateIndexNumb(defaultPlayList.data, defaultPlayList.data[e]);
+              const removedSong = defaultPlayList.data.splice(elementToRemove, 1);
+              const stringTo = JSON.stringify(removedSong);
+              const formatedToString = stringTo.replace("[","").replace("]","");
+              const formatedToJSON = JSON.parse(formatedToString);
+              const converted = Object.assign({}, formatedToJSON);
+              defaultPlayList.dataNew.push(converted);
+              defaultPlayList.updateStorage();
+              console.log('Added song:',defaultPlayList.data[e].song);
+              console.log('Added band:',defaultPlayList.data[e].band);
+            }
+          }
         }
       }
   
       function onDropFrom(event) {
         if (event.target.className === 'ui-homelist-position') {
           const data = event.dataTransfer.getData('text');
-          console.log(data);
           const selectedElement = document.querySelector(`[data-song-clicked="${data}"]`);
-          console.log(selectedElement);
           selectedElement.parentNode.removeChild(selectedElement);
           event.target.appendChild(selectedElement);
+          for (let e = 0; e < defaultPlayList.dataNew.length; e++){
+            if(data === defaultPlayList.dataNew[e].songPosition) {
+              const elementToRemove = generateIndexNumb(defaultPlayList.dataNew, defaultPlayList.dataNew[e]);
+              const removedSong = defaultPlayList.dataNew.splice(elementToRemove, 1);
+              const stringTo = JSON.stringify(removedSong);
+              const formatedToString = stringTo.replace("[","").replace("]","");
+              const formatedToJSON = JSON.parse(formatedToString);
+              const converted = Object.assign({}, formatedToJSON);
+              defaultPlayList.data.push(converted);
+              defaultPlayList.updateStorage();
+              console.log('Removed song:',defaultPlayList.data[e].song);
+              console.log('Removed band:',defaultPlayList.data[e].band);
+            }
+          }
         }
       }
   
@@ -710,8 +657,8 @@ const Playlist = (function builtList() {
 
       // Render block.
       // /////////////
-      listDefaultComponent(defaultPlayList, defaultlistContainer);
-      listNewComponent(defaultPlayList, playlistContainer);
+      listDefaultComponent(defaultPlayList.data, defaultlistContainer);
+      listNewComponent(defaultPlayList.dataNew, playlistContainer);
       playlistContainer.addEventListener('drop', onDropTo);
       defaultlistContainer.addEventListener('drop', onDropFrom);
       playlistContainer.addEventListener('dragover', dragOverTo);
@@ -722,8 +669,11 @@ const Playlist = (function builtList() {
 
 (function builderComponents() {
   function main() {
+    const utility = new Singletone();
     const layout = new MediaPlayer();
     const listLayout = new Playlist();
+
+    window.addEventListener('onload', utility.getStorage());
   }
   main();
 }());
