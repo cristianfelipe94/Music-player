@@ -13,13 +13,23 @@
 </head>
 <body>
   <div id="ui-body">
-    <ul>
+    <ul class="ui-navTabs-margin">
       <li id="js-goToList-change" class="ui-nav-layout">PLAYLIST</li>
       <li id="js-goToHome-change" class="ui-nav-layout">HOME</li>
     </ul>
-    <div class="ui-bodyplayer-moved-layout" id="js-bodyplayer-layout">
+    <ul class="ui-sortList-hidden-position" id="js-sortList-togging">
+      <li class="ui-sorter-style">Sort by Band</li>
+      <li class="ui-sorter-style">Sort by Song</li>
+      <li class="ui-sorter-style">Sort by Date</li>
+    </ul>
+    <div id="js-playlist-layout" class="ui-homelist-hidden-position"></div>
+    <div class="ui-bodyplayer-default-layout" id="js-bodyplayer-layout">
+      <ul class="ui-sortHome-position">
+        <li class="ui-sorter-style">Sort by Band</li>
+        <li class="ui-sorter-style">Sort by Song</li>
+        <li class="ui-sorter-style">Sort by Date</li>
+      </ul>
       <div class="ui-playList-position" id="js-playlist-content"></div>
-      <div id="js-playlist-layout" class="ui-homelist-position"></div>
       <div id="js-albumCover-layout" class="ui-songImage-size"></div>
     </div>
     <div id="js-player-layout" class="ui-player-position"></div>

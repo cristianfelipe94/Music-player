@@ -78,20 +78,25 @@ audio::-webkit-media-controls-play-button {
   left: 4vw;
   bottom: 5vh;
   height: 80vh;
-  border: 1px solid white;
+  border-right: 1px solid white;
   overflow-x: auto;
 }
 
 .ui-playList-default {
 	border: solid 1px deeppink;
 	margin: 5%;
-	box-shadow: 0 0 0px black;
+  box-shadow: 0 0 0px black;
 	cursor: pointer;
 	transition: 1s;
 	&:hover {
 		transition: 0.8s;
 		box-shadow: 0 0 20px deeppink;
 	}
+}
+
+.ui-playList-default p {
+  display: inline-block;
+  padding: 2%;
 }
 
 .ui-playList-selected {
@@ -171,18 +176,26 @@ audio::-webkit-media-controls-play-button {
   margin: 0 auto;
   right: 0;
   transition: 3s;
-  .ui-homelist-position  {
-    left: -35vw;
-    transition: 2s;
-  }
 }
 
-.ui-homelist-position {
+.ui-homelist-hidden-position {
   list-style: none;
   width: 40%;
   position: absolute;
-  left: -47vw;
-  bottom: 5vh;
+  left: -50%;
+  bottom: 8.5%;
+  height: 80vh;
+  border: 1px solid deeppink;
+  overflow-x: auto;
+  transition: 2s;
+}
+
+.ui-homelist-showing-position  {
+  list-style: none;
+  width: 40%;
+  position: absolute;
+  left: 11%;
+  bottom: 8.5%;
   height: 80vh;
   border: 1px solid deeppink;
   overflow-x: auto;
@@ -200,6 +213,64 @@ audio::-webkit-media-controls-play-button {
 .ui-nav-layout {
   cursor: pointer;
   list-style: none;
-  width: 40%;
+  margin: 1% 10% 0 6%;
   display: inline-block;
+  border-bottom: 1px solid #03191E;
+  transition: 0.8s;
+  &:hover {
+    border-bottom: 1px solid deeppink;
+    transition: 0.8s;
+  }
+}
+
+.ui-sorter-style {
+  list-style: none;
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px;
+  margin: 2px;
+  transition: 0.8s;
+  border-bottom: 1px solid #03191E;
+  transition: 0.8s;
+  &:hover {
+    border-bottom: 1px solid deeppink;
+    transition: 0.8s;
+  }
+}
+
+.ui-sortList-showing-position {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  top: 6.3%;
+  left: 12%;
+  position: absolute;
+  transition: 2s;
+}
+
+.ui-sortList-hidden-position {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  top: 6.3%;
+  left: -50%;
+  position: absolute;
+  transition: 2s;
+}
+
+.ui-sortHome-position {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: -6%;
+  left: 7%;
+}
+
+.ui-navTabs-margin {
+  padding: 0;
+  margin: 2% 0% 5% 2%;
 }
