@@ -18,16 +18,16 @@
       <li id="js-goToHome-change" class="ui-nav-layout">HOME</li>
     </ul>
     <ul class="ui-sortList-hidden-position" id="js-sortList-togging">
-      <li class="ui-sorter-style">Sort by Band</li>
-      <li class="ui-sorter-style">Sort by Song</li>
-      <li class="ui-sorter-style">Sort by Date</li>
+      <li class="ui-sorter-style" id="js-sortDefault-band">Sort by Band</li>
+      <li class="ui-sorter-style" id="js-sortDefault-song">Sort by Song</li>
+      <li class="ui-sorter-style" id="js-sortDefault-date">Sort by Date</li>
     </ul>
     <div id="js-playlist-layout" class="ui-homelist-hidden-position"></div>
     <div class="ui-bodyplayer-default-layout" id="js-bodyplayer-layout">
       <ul class="ui-sortHome-position">
-        <li class="ui-sorter-style">Sort by Band</li>
-        <li class="ui-sorter-style">Sort by Song</li>
-        <li class="ui-sorter-style">Sort by Date</li>
+        <li class="ui-sorter-style" id="js-sortCreated-band">Sort by Band</li>
+        <li class="ui-sorter-style" id="js-sortCreated-song">Sort by Song</li>
+        <li class="ui-sorter-style" id="js-sortCreated-date">Sort by Date</li>
       </ul>
       <div class="ui-playList-position" id="js-playlist-content"></div>
       <div id="js-albumCover-layout" class="ui-songImage-size"></div>
@@ -39,6 +39,7 @@
   <script src="js/mediator.js"></script>
   <script src="js/playerComponent.js"></script>
   <script src="js/playListComponent.js"></script>
+  <script src="js/sortBy.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>

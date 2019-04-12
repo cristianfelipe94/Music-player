@@ -7,6 +7,18 @@ const defaultlistDOMcontainer = document.getElementById('js-playlist-layout');
 const playlistDOMcontainer = document.getElementById('js-playlist-content');
 const albumCoverDOMcontainer = document.getElementById('js-albumCover-layout');
 
+const sorterDefaultBand = document.getElementById('js-sortDefault-band');
+const sorterDefaultSong = document.getElementById('js-sortDefault-song');
+const sorterDefaultDate = document.getElementById('js-sortDefault-date');
+const sorterCreatedBand = document.getElementById('js-sortCreated-band');
+const sorterCreatedSong = document.getElementById('js-sortCreated-song');
+const sorterCreatedDate = document.getElementById('js-sortCreated-date');
+
+
+
+
+
+
 const sortListMoving = document.getElementById('js-sortList-togging');
 
 function getterElement(target, element) {
